@@ -2,7 +2,6 @@ import React from 'react';
 import { Line } from 'react-konva';
 
 import {Props} from "./ChartLine.types";
-import {ChartFactory} from "../ChartFactory";
 import {createXAndYCoordinates} from "../utils/createXAndYCoordinates";
 
 const ChartLine: React.FC<Props> = (props) => {
@@ -11,7 +10,10 @@ const ChartLine: React.FC<Props> = (props) => {
         xScale,
         yScale,
         xValue,
-        yValue
+        yValue,
+        stroke,
+        lineCap,
+        lineJoin
     } = props;
 
     const xPoints = (d) => xScale(+xValue(d));
@@ -22,7 +24,10 @@ const ChartLine: React.FC<Props> = (props) => {
     return (
         <Line
             points={points}
-            stroke={'black'}
+            stroke={stroke}
+            lineCap={lineCap}
+            lineJoin={lineJoin}
+
         />
     )
 }

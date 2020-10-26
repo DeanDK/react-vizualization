@@ -1,6 +1,7 @@
 import {ScaleFunctionTypes} from "../ChartFactory.types";
+import Konva from "konva";
 
-export type Props = {
+export type Props = Konva.ShapeConfig & {
     /**
      *
      */

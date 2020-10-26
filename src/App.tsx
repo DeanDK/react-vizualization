@@ -84,6 +84,9 @@ const App: React.FC<{}> = () => {
                     yScale={yScale}
                     xValue={xValue}
                     yValue={yValue}
+                    stroke={'black'}
+                    lineCap={'round'}
+                    lineJoin={'round'}
                 />
             </ChartLayer>
         </Chart>
