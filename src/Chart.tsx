@@ -2,14 +2,17 @@ import React from 'react';
 import {Stage} from 'react-konva'
 
 import {ChartRoot} from "./Chart.styles";
-import {Props} from "./Chart.types";
+import {ChartProps} from "./Chart.types";
 import {ChartStoreContext} from "./hooks/useChartStore";
 
-const Chart: React.FC<Props> = (props) => {
+const Chart: React.FC<ChartProps> = (props) => {
     const {
         width,
         height,
-        margin,
+        marginLeft,
+        marginBottom,
+        marginTop,
+        marginRight,
         children
     } = props;
 
@@ -18,17 +21,17 @@ const Chart: React.FC<Props> = (props) => {
             height={height}
             width={width}
             title={'Test Chart'}
-            marginLeft={margin.left}
-            marginRigth={margin.right}
-            marginTop={margin.top}
-            marginBottom={margin.bottom}
+            marginLeft={marginLeft}
+            marginRight={marginRight}
+            marginTop={marginTop}
+            marginBottom={marginBottom}
         >
             <Stage
                 height={window.innerHeight}
                 width={window.innerWidth}
                 draggable={true}
             >
-                <ChartStoreContext.Provider value={{height: height, width: width, margin}}>
+                <ChartStoreContext.Provider value={{height: height, width: width}}>
                     {children}
                 </ChartStoreContext.Provider>
             </Stage>

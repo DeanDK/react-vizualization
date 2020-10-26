@@ -6,24 +6,34 @@ import {useData} from "./hooks/useData";
 import Chart from "./Chart";
 import ChartAxis from "./ChartAxis/ChartAxis";
 import ChartGridLine from "./ChartGridLine/ChartGridLine";
+import ChartLine from './ChartLine/ChartLine';
 
 const App: React.FC<{}> = () => {
     const [chartSize, setChartSize] = React.useState({
-        height: window.innerHeight - 100,
-        width: window.innerWidth - 100,
+        h: window.innerHeight - 100,
+        w: window.innerWidth - 100,
     })
 
     const data = useData();
-    const {height, width} = chartSize;
-    const margin = {top: 20, bottom: 20, left: 20, right: 20};
-    const innerWidth = width - margin.left - margin.right;
-    const innerHeight = height - margin.top - margin.bottom;
+    const {h, w} = chartSize;
+    const dimension = {height: h, width: w, marginLeft: 20, marginBottom: 20, marginTop: 20, marginRight: 20}
+
+    const {
+        height,
+        width,
+        marginLeft,
+        marginRight,
+        marginBottom,
+        marginTop,
+        innerHeight,
+        innerWidth
+    } = ChartFactory.createSizing(dimension)
 
     React.useEffect(() => {
         const fn = () => {
             setChartSize({
-                height: window.innerHeight - 100,
-                width: window.innerWidth - 100,
+                h: window.innerHeight - 100,
+                w: window.innerWidth - 100,
             })
         }
         window.addEventListener('resize', fn, false)
@@ -51,7 +61,10 @@ const App: React.FC<{}> = () => {
             height={height}
             width={width}
             title={'Line Chart'}
-            margin={margin}
+            marginLeft={marginLeft}
+            marginRight={marginRight}
+            marginBottom={marginBottom}
+            marginTop={marginTop}
         >
             <ChartLayer>
                 <ChartGridLine xScale={xScale} yScale={yScale}/>
@@ -64,6 +77,13 @@ const App: React.FC<{}> = () => {
                     orientation={'horizontal'}
                     xScale={xScale}
                     yScale={yScale}
+                />
+                <ChartLine
+                    data={data}
+                    xScale={xScale}
+                    yScale={yScale}
+                    xValue={xValue}
+                    yValue={yValue}
                 />
             </ChartLayer>
         </Chart>
