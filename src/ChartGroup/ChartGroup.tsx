@@ -1,0 +1,1 @@
+export { Group as ChartGroup } from 'react-konva'

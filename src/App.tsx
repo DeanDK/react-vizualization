@@ -1,26 +1,73 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+import {ChartLayer} from "./ChartLayer/ChartLayer";
+import {ChartFactory} from "./ChartFactory";
+import {useData} from "./hooks/useData";
+import Chart from "./Chart";
+import ChartAxis from "./ChartAxis/ChartAxis";
+import ChartGridLine from "./ChartGridLine/ChartGridLine";
+
+const App: React.FC<{}> = () => {
+    const [chartSize, setChartSize] = React.useState({
+        height: window.innerHeight - 50,
+        width: window.innerWidth - 50,
+    })
+
+    const data = useData();
+    const {height, width} = chartSize;
+    const margin = {top: 20, bottom: 20, left: 20, right: 20};
+    const innerWidth = width - margin.left - margin.right;
+    const innerHeight = height - margin.top - margin.bottom;
+
+    React.useEffect(() => {
+        const fn = () => {
+            setChartSize({
+                height: window.innerHeight - 50,
+                width: window.innerWidth - 50,
+            })
+        }
+        window.addEventListener('resize', fn, false)
+
+        return () => {
+            window.removeEventListener('resize', fn)
+        }
+    }, [])
+
+    if (!data) {
+        return <pre>Loading...</pre>
+    }
+
+    const xValue = d => d.Population
+    const yValue = d => d.CountryCode
+
+    const domainX = ChartFactory.calculateDomainMaxValue(data, xValue);
+    const domainY = ChartFactory.calculateDomainMaxValue(data, yValue)
+
+    const xScale = ChartFactory.createLinearXScale(domainX, innerWidth)
+    const yScale = ChartFactory.createLinearYScale(domainY, innerHeight)
+
+    return (
+        <Chart
+            height={height}
+            width={width}
+            title={'Line Chart'}
+            margin={margin}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+            <ChartLayer>
+                <ChartGridLine xScale={xScale} yScale={yScale}/>
+                <ChartAxis
+                    orientation={'vertical'}
+                    xScale={xScale}
+                    yScale={yScale}
+                />
+                <ChartAxis
+                    orientation={'horizontal'}
+                    xScale={xScale}
+                    yScale={yScale}
+                />
+            </ChartLayer>
+        </Chart>
+    );
 }
 
 export default App;
