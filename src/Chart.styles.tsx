@@ -10,7 +10,6 @@ const ChartRoot = styled.div.attrs(props => ({
    margin-bottom: ${({marginBottom}) => marginBottom}px
    margin-right: ${(marginRight) => marginRight}px
    margin-left: ${(marginLeft) => marginLeft}px
-   overflow: hidden;
    cursor: move;
    position: relative;
 `;

@@ -9,8 +9,8 @@ import ChartGridLine from "./ChartGridLine/ChartGridLine";
 
 const App: React.FC<{}> = () => {
     const [chartSize, setChartSize] = React.useState({
-        height: window.innerHeight - 50,
-        width: window.innerWidth - 50,
+        height: window.innerHeight - 100,
+        width: window.innerWidth - 100,
     })
 
     const data = useData();
@@ -22,8 +22,8 @@ const App: React.FC<{}> = () => {
     React.useEffect(() => {
         const fn = () => {
             setChartSize({
-                height: window.innerHeight - 50,
-                width: window.innerWidth - 50,
+                height: window.innerHeight - 100,
+                width: window.innerWidth - 100,
             })
         }
         window.addEventListener('resize', fn, false)

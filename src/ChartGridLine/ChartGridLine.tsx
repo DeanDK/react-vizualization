@@ -19,7 +19,7 @@ const ChartGridLine: React.FC<Props> = (props) => {
     return (
         <>
             {(xAxisTickValues as [number, number]).map((tickValue, index) => (
-                <Group transform={`translate(${xScale(tickValue)},0)`} key={index} x={20}>
+                <Group transform={`translate(${xScale(tickValue)},0)`} key={index} x={50}>
                     <Line
                         points={[xScale(tickValue), 0, xScale(tickValue), height]}
                         stroke={'lightgrey'}
@@ -35,7 +35,7 @@ const ChartGridLine: React.FC<Props> = (props) => {
                 </Group>
             ))}
             {(yAxisTickValues as [number, number]).map((tickValue, index) => (
-                <Group transform={`translate(0, ${yScale(tickValue)})`} key={index} x={20}>
+                <Group transform={`translate(0, ${yScale(tickValue)})`} key={index} x={50}>
                     <Line
                         points={[0, yScale(tickValue), width, yScale(tickValue)]}
                         stroke={'lightgrey'}
@@ -43,10 +43,10 @@ const ChartGridLine: React.FC<Props> = (props) => {
                     <Text
                         align='center'
                         y={yScale(tickValue)}
-                        x={-30}
+                        x={-40}
                         text={tickValue.toString()}
                         fontSize={15}
-                        padding={5}
+                        padding={10}
                     />
                 </Group>
             ))}

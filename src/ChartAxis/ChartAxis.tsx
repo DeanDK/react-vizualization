@@ -15,7 +15,7 @@ export const ChartAxis: React.FC<Props> = (props) => {
 
     return (
         <Line
-            x={20}
+            x={50}
             points={points}
             stroke="black"
             scaleX={1}
