@@ -8,6 +8,7 @@ const ChartGridLine: React.FC<Props> = (props) => {
     const {
         xScale,
         yScale,
+        xAxisTimeFormat
     } = props;
 
     const {height, width} = useChartStore();
@@ -17,7 +18,7 @@ const ChartGridLine: React.FC<Props> = (props) => {
 
     return (
         <>
-            {(xAxisTickValues as [number, number]).map((tickValue, index) => (
+            {(xAxisTickValues as Date[]).map((tickValue, index) => (
                 <Group transform={`translate(${xScale(tickValue)},0)`} key={index} x={50}>
                     <Line
                         points={[xScale(tickValue), 0, xScale(tickValue), height]}
@@ -27,7 +28,7 @@ const ChartGridLine: React.FC<Props> = (props) => {
                         align='center'
                         x={xScale(tickValue)}
                         y={height}
-                        text={tickValue.toString()}
+                        text={xAxisTimeFormat(tickValue)}
                         fontSize={15}
                         padding={5}
                     />

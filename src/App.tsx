@@ -47,14 +47,16 @@ const App: React.FC<{}> = () => {
         return <pre>Loading...</pre>
     }
 
-    const xValue = d => d.Population
-    const yValue = d => d.CountryCode
+    const xValue = d => d.timestamp
+    const yValue = d => d.temperature
 
-    const domainX = ChartFactory.calculateDomainMaxValue(data, xValue);
-    const domainY = ChartFactory.calculateDomainMaxValue(data, yValue)
+    const domainX = ChartFactory.extentData(data, xValue);
+    const domainY = ChartFactory.extentData(data, yValue);
 
-    const xScale = ChartFactory.createLinearXScale(domainX, innerWidth)
+    const xScale = ChartFactory.createTimeScale(domainX, innerWidth)
     const yScale = ChartFactory.createLinearYScale(domainY, innerHeight)
+
+    const xAxisTimeFormat = ChartFactory.formatTime('%a');
 
     return (
         <Chart
@@ -67,7 +69,11 @@ const App: React.FC<{}> = () => {
             marginTop={marginTop}
         >
             <ChartLayer>
-                <ChartGridLine xScale={xScale} yScale={yScale}/>
+                <ChartGridLine
+                    xScale={xScale}
+                    yScale={yScale}
+                    xAxisTimeFormat={xAxisTimeFormat}
+                />
                 <ChartAxis
                     orientation={'vertical'}
                     xScale={xScale}

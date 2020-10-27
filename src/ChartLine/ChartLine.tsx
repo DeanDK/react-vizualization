@@ -2,7 +2,6 @@ import React from 'react';
 import { Line } from 'react-konva';
 
 import {Props} from "./ChartLine.types";
-import {createXAndYCoordinates} from "../utils/createXAndYCoordinates";
 import {ChartFactory} from "../ChartFactory";
 
 const ChartLine: React.FC<Props> = (props) => {
