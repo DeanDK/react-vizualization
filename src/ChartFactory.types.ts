@@ -4,8 +4,7 @@ import { ChartProps } from './Chart.types'
 
 export type ScaleFunctionTypes =
     ScaleLinear<number, number> |
-    ScaleTime<number, number> |
-    ScalePower<number, number>
+    ScaleTime<number, number>
 
 
 export type ChartDimensions = Pick<ChartProps,

@@ -1,4 +1,4 @@
-import {ScaleLinear, scaleLinear, ScaleContinuousNumeric, max} from "d3";
+import {ScaleLinear, scaleLinear, ScaleContinuousNumeric, max, zip} from "d3";
 
 import {ChartDimensions, ChartSizing, ScaleFunctionTypes} from "./ChartFactory.types";
 
@@ -48,4 +48,9 @@ export class ChartFactory {
     public static calculateDomainMaxValue(data: number[], fn: (d: any) => number): [number, number] {
         return [0, max(data, fn)]
     }
+
+    public static calculateXAndYCoordinates(arr1: number[], arr2: number[]) {
+        return zip(arr1, arr2).flat();
+    }
+
 }

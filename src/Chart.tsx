@@ -16,6 +16,7 @@ const Chart: React.FC<ChartProps> = (props) => {
         children
     } = props;
 
+    // stage height width prop
     return (
         <ChartRoot
             height={height}

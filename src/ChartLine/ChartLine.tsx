@@ -3,6 +3,7 @@ import { Line } from 'react-konva';
 
 import {Props} from "./ChartLine.types";
 import {createXAndYCoordinates} from "../utils/createXAndYCoordinates";
+import {ChartFactory} from "../ChartFactory";
 
 const ChartLine: React.FC<Props> = (props) => {
     const {
@@ -19,7 +20,7 @@ const ChartLine: React.FC<Props> = (props) => {
     const xPoints = (d) => xScale(+xValue(d));
     const yPoints = (d) => yScale(+yValue(d));
 
-    const points = createXAndYCoordinates(data.map(xPoints), data.map(yPoints))
+    const points = ChartFactory.calculateXAndYCoordinates(data.map(xPoints), data.map(yPoints))
 
     return (
         <Line
@@ -27,7 +28,6 @@ const ChartLine: React.FC<Props> = (props) => {
             stroke={stroke}
             lineCap={lineCap}
             lineJoin={lineJoin}
-
         />
     )
 }

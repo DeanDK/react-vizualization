@@ -5,4 +5,7 @@ export type Props = Konva.ShapeConfig & {
     tension?: number;
     closed?: boolean;
     bezier?: boolean;
+    labelOffset?: number;
+    labelText?: string;
+    labelFontSize?: string;
 }

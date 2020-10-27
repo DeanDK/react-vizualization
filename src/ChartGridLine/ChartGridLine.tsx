@@ -2,7 +2,6 @@ import React from 'react';
 import {Group, Line, Text} from 'react-konva';
 
 import {Props} from "./ChartGridLine.types";
-import {ChartFactory} from "../ChartFactory";
 import {useChartStore} from "../hooks/useChartStore";
 
 const ChartGridLine: React.FC<Props> = (props) => {
@@ -13,8 +12,8 @@ const ChartGridLine: React.FC<Props> = (props) => {
 
     const {height, width} = useChartStore();
 
-    const xAxisTickValues = ChartFactory.getTickValues(xScale)
-    const yAxisTickValues = ChartFactory.getTickValues(yScale);
+    const xAxisTickValues = xScale.ticks();
+    const yAxisTickValues = yScale.ticks();
 
     return (
         <>
