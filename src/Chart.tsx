@@ -16,7 +16,8 @@ const Chart: React.FC<ChartProps> = (props) => {
         children
     } = props;
 
-    // stage height width prop
+
+
     return (
         <ChartRoot
             height={height}
@@ -28,11 +29,14 @@ const Chart: React.FC<ChartProps> = (props) => {
             marginBottom={marginBottom}
         >
             <Stage
-                height={window.innerHeight}
-                width={window.innerWidth}
+                height={height + 100}
+                width={width + 100}
                 draggable={true}
+                y={10}
             >
-                <ChartStoreContext.Provider value={{height: height, width: width}}>
+                <ChartStoreContext.Provider
+                    value={{height: height, width: width}}
+                >
                     {children}
                 </ChartStoreContext.Provider>
             </Stage>

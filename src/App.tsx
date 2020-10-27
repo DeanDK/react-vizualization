@@ -9,14 +9,21 @@ import ChartGridLine from "./ChartGridLine/ChartGridLine";
 import ChartLine from './ChartLine/ChartLine';
 
 const App: React.FC<{}> = () => {
-    const [chartSize, setChartSize] = React.useState({
-        h: window.innerHeight - 100,
-        w: window.innerWidth - 100,
+    const [chartSize] = React.useState({
+        h: 500,
+        w: 1000,
     })
 
     const data = useData();
     const {h, w} = chartSize;
-    const dimension = {height: h, width: w, marginLeft: 20, marginBottom: 20, marginTop: 20, marginRight: 20}
+    const dimension = {
+        height: h,
+        width: w,
+        marginLeft: 20,
+        marginBottom: 20,
+        marginTop: 25,
+        marginRight: 20
+    }
 
     const {
         height,
@@ -28,20 +35,6 @@ const App: React.FC<{}> = () => {
         innerHeight,
         innerWidth
     } = ChartFactory.createSizing(dimension)
-
-    React.useEffect(() => {
-        const fn = () => {
-            setChartSize({
-                h: window.innerHeight - 100,
-                w: window.innerWidth - 100,
-            })
-        }
-        window.addEventListener('resize', fn, false)
-
-        return () => {
-            window.removeEventListener('resize', fn)
-        }
-    }, [])
 
     if (!data) {
         return <pre>Loading...</pre>

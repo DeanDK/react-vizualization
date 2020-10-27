@@ -1,5 +1,5 @@
 import React from 'react';
-import {Line, Text} from "react-konva";
+import {Line} from "react-konva";
 
 import {Props} from "./ChartAxis.types";
 import {useChartStore} from "../hooks/useChartStore";

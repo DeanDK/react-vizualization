@@ -48,13 +48,16 @@ export class ChartFactory {
         return scaleLinear()
             .domain(domain)
             .rangeRound([height, 0])
+            .nice()
+            .clamp(true)
     }
 
     public static createTimeScale(domain: [number, number], width: number): ScaleTime<number, number> {
         return scaleTime()
             .domain(domain)
             .rangeRound([0, width])
-            .nice();
+            .nice()
+            .clamp(true)
     }
 
     public static calculateDomainMaxValue(data: number[], fn: (d: any) => number): [number, number] {

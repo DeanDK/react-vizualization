@@ -19,14 +19,14 @@ const ChartGridLine: React.FC<Props> = (props) => {
     return (
         <>
             {(xAxisTickValues as Date[]).map((tickValue, index) => (
-                <Group transform={`translate(${xScale(tickValue)},0)`} key={index} x={50}>
+                <Group transform={`translate(${xScale(tickValue)},0)`} key={index} x={90}>
                     <Line
                         points={[xScale(tickValue), 0, xScale(tickValue), height]}
                         stroke={'lightgrey'}
                     />
                     <Text
                         align='center'
-                        x={xScale(tickValue)}
+                        x={xScale(tickValue) - 15}
                         y={height}
                         text={xAxisTimeFormat(tickValue)}
                         fontSize={15}
@@ -35,14 +35,14 @@ const ChartGridLine: React.FC<Props> = (props) => {
                 </Group>
             ))}
             {(yAxisTickValues as [number, number]).map((tickValue, index) => (
-                <Group transform={`translate(0, ${yScale(tickValue)})`} key={index} x={50}>
+                <Group transform={`translate(0,${yScale(tickValue)})`} key={index} x={50}>
                     <Line
                         points={[0, yScale(tickValue), width, yScale(tickValue)]}
                         stroke={'lightgrey'}
                     />
                     <Text
                         align='center'
-                        y={yScale(tickValue)}
+                        y={yScale(tickValue) - 15}
                         x={-40}
                         text={tickValue.toString()}
                         fontSize={15}
