@@ -77,7 +77,6 @@ const App: React.FC<{}> = () => {
                     orientation={'horizontal'}
                     xScale={xScale}
                     yScale={yScale}
-                    labelText={'Population'}
                 />
                 <ChartLine
                     data={data}

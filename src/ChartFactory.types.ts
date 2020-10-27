@@ -1,11 +1,10 @@
 import {ScaleLinear, ScaleTime, ScalePower} from "d3";
 
-import { ChartProps } from './Chart.types'
+import {ChartProps} from './Chart.types'
 
 export type ScaleFunctionTypes =
     ScaleLinear<number, number> |
     ScaleTime<number, number>
-
 
 export type ChartDimensions = Pick<ChartProps,
     | 'height'
