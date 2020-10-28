@@ -16,7 +16,12 @@ const Chart: React.FC<ChartProps> = (props) => {
         children
     } = props;
 
-
+    const margin = {
+        top: marginTop,
+        bottom: marginBottom,
+        left: marginLeft,
+        right: marginRight
+    }
 
     return (
         <ChartRoot
@@ -35,7 +40,7 @@ const Chart: React.FC<ChartProps> = (props) => {
                 y={10}
             >
                 <ChartStoreContext.Provider
-                    value={{height: height, width: width}}
+                    value={{height: height, width: width, margin}}
                 >
                     {children}
                 </ChartStoreContext.Provider>

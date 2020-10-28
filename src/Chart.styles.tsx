@@ -11,7 +11,6 @@ const ChartRoot = styled.div.attrs(props => ({
    margin-right: ${(marginRight) => marginRight}px
    margin-left: ${(marginLeft) => marginLeft}px
    cursor: move;
-   position: relative;
 `;
 
 export { ChartRoot }

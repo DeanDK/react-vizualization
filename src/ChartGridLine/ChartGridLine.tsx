@@ -8,10 +8,17 @@ const ChartGridLine: React.FC<Props> = (props) => {
     const {
         xScale,
         yScale,
-        xAxisTimeFormat
+        xAxisTimeFormat,
+        xAxisTickLabelOffset = 15,
+        yLabelTickLabelOffset = 40,
+        xAxisGridLinesOffset = 50,
+        yAxisGridLinesOffset = 50
     } = props;
 
-    const {height, width} = useChartStore();
+    const {height, width, margin} = useChartStore();
+
+    const innerHeight = height - margin.top - margin.bottom;
+    const innerWidth = width - margin.left - margin.right;
 
     const xAxisTickValues = xScale.ticks();
     const yAxisTickValues = yScale.ticks();
@@ -19,34 +26,44 @@ const ChartGridLine: React.FC<Props> = (props) => {
     return (
         <>
             {(xAxisTickValues as Date[]).map((tickValue, index) => (
-                <Group transform={`translate(${xScale(tickValue)},0)`} key={index} x={90}>
+                <Group
+                    key={index}
+                    x={xScale(tickValue)}
+                    y={0}
+                    offsetX={-50}
+                >
                     <Line
-                        points={[xScale(tickValue), 0, xScale(tickValue), height]}
+                        points={[0, 0, 0, innerHeight]}
                         stroke={'lightgrey'}
                     />
                     <Text
                         align='center'
-                        x={xScale(tickValue) - 15}
+                        x={-xAxisTickLabelOffset}
                         y={height}
                         text={xAxisTimeFormat(tickValue)}
                         fontSize={15}
-                        padding={5}
+                        padding={0}
                     />
                 </Group>
             ))}
             {(yAxisTickValues as [number, number]).map((tickValue, index) => (
-                <Group transform={`translate(0,${yScale(tickValue)})`} key={index} x={50}>
+                <Group
+                    key={index}
+                    x={0}
+                    y={yScale(tickValue)}
+                    offsetX={-50}
+                >
                     <Line
-                        points={[0, yScale(tickValue), width, yScale(tickValue)]}
+                        points={[0, 0, innerWidth, 0]}
                         stroke={'lightgrey'}
                     />
                     <Text
                         align='center'
-                        y={yScale(tickValue) - 15}
-                        x={-40}
+                        y={0}
+                        x={-yLabelTickLabelOffset}
                         text={tickValue.toString()}
                         fontSize={15}
-                        padding={10}
+                        padding={5}
                     />
                 </Group>
             ))}

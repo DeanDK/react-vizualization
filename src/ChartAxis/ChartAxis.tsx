@@ -9,9 +9,12 @@ export const ChartAxis: React.FC<Props> = (props) => {
         orientation,
     } = props;
 
-    const {height, width} = useChartStore();
+    const {height, width, margin} = useChartStore();
 
-    const points = orientation === 'vertical' ? [0, 0, 0, height] : [0, height, width, height];
+    const innerWidth = width - margin.left - margin.right
+    const innerHeight = height - margin.top - margin.bottom
+
+    const points = orientation === 'vertical' ? [0, 0, 0, innerHeight] : [0, innerHeight, innerWidth, innerHeight];
 
     return (
         <>

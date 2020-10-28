@@ -19,10 +19,10 @@ const App: React.FC<{}> = () => {
     const dimension = {
         height: h,
         width: w,
-        marginLeft: 20,
-        marginBottom: 20,
-        marginTop: 25,
-        marginRight: 20
+        marginLeft: 10,
+        marginRight: 10,
+        marginTop: 10,
+        marginBottom: 10
     }
 
     const {
