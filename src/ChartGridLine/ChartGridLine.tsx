@@ -11,12 +11,14 @@ const ChartGridLine: React.FC<Props> = (props) => {
         xAxisTimeFormat,
         xAxisTickLabelOffset = 15,
         yLabelTickLabelOffset = 40,
+        numberOfXAxisTicks,
+        numberOfYAxisTicks
     } = props;
 
     const {height, dimensions: {innerHeight, innerWidth}} = useChartStore();
 
-    const xAxisTickValues = xScale.ticks();
-    const yAxisTickValues = yScale.ticks();
+    const xAxisTickValues = xScale.ticks(numberOfXAxisTicks);
+    const yAxisTickValues = yScale.ticks(numberOfYAxisTicks);
 
     return (
         <>
@@ -54,7 +56,7 @@ const ChartGridLine: React.FC<Props> = (props) => {
                     />
                     <Text
                         align='center'
-                        y={0}
+                        y={-10}
                         x={-yLabelTickLabelOffset}
                         text={tickValue.toString()}
                         fontSize={15}

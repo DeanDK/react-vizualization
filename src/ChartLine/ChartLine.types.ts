@@ -9,7 +9,7 @@ export type Props = Konva.ShapeConfig & {
     /**
      *
      */
-    data: [number, number][],
+    data: number[],
     /**
      *
      */

@@ -29,4 +29,12 @@ export type Props = {
      *
      */
     yAxisGridLinesOffset?: number;
+    /**
+     *
+     */
+    numberOfXAxisTicks?: number;
+    /**
+     *
+     */
+    numberOfYAxisTicks?: number;
 }

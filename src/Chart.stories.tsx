@@ -73,6 +73,9 @@ const ChartStory = (props): JSX.Element => {
                     xScale={xScale}
                     yScale={yScale}
                     xAxisTimeFormat={xAxisTimeFormat}
+                    numberOfXAxisTicks={args.numberOfXAxisTicks}
+                    numberOfYAxisTicks={args.numberOfYAxisTicks}
+                    {...args}
                 />
                 <ChartAxis
                     orientation={'vertical'}
@@ -105,8 +108,10 @@ const Template = args => <ChartStory {...args} />
 export const LineChart = Template.bind({});
 
 LineChart.args = {
-    height: 400,
-    width: 800
+    height: 300,
+    width: 800,
+    numberOfXAxisTicks: 11,
+    numberOfYAxisTicks: 11
 }
 
 LineChart.argTypes = {
