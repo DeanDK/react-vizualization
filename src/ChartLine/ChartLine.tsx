@@ -27,6 +27,7 @@ const ChartLine: React.FC<Props> = (props) => {
             stroke={stroke}
             lineCap={lineCap}
             lineJoin={lineJoin}
+            x={50}
         />
     )
 }

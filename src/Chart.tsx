@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {Stage} from 'react-konva'
 
 import {ChartRoot} from "./Chart.styles";
@@ -9,6 +9,8 @@ const Chart: React.FC<ChartProps> = (props) => {
     const {
         width,
         height,
+        innerWidth,
+        innerHeight,
         marginLeft,
         marginBottom,
         marginTop,
@@ -16,12 +18,23 @@ const Chart: React.FC<ChartProps> = (props) => {
         children
     } = props;
 
-    const margin = {
+
+    const dimensions = {
         top: marginTop,
         bottom: marginBottom,
         left: marginLeft,
-        right: marginRight
+        right: marginRight,
+        innerHeight,
+        innerWidth
     }
+
+    const providerObject = useMemo(() => {
+        return {
+            height,
+            width,
+            dimensions
+        }
+    }, [height, width, dimensions])
 
     return (
         <ChartRoot
@@ -36,11 +49,10 @@ const Chart: React.FC<ChartProps> = (props) => {
             <Stage
                 height={height + 100}
                 width={width + 100}
-                draggable={true}
                 y={10}
             >
                 <ChartStoreContext.Provider
-                    value={{height: height, width: width, margin}}
+                    value={providerObject}
                 >
                     {children}
                 </ChartStoreContext.Provider>

@@ -1,24 +1,28 @@
 import React from 'react';
 
-import {ChartLayer} from "./ChartLayer/ChartLayer";
-import {ChartFactory} from "./ChartFactory";
 import {useData} from "./hooks/useData";
+import {ChartFactory} from "./ChartFactory";
 import Chart from "./Chart";
-import ChartAxis from "./ChartAxis/ChartAxis";
+import {ChartLayer} from "./ChartLayer/ChartLayer";
 import ChartGridLine from "./ChartGridLine/ChartGridLine";
-import ChartLine from './ChartLine/ChartLine';
+import ChartAxis from "./ChartAxis/ChartAxis";
+import ChartLine from "./ChartLine/ChartLine";
 
-const App: React.FC<{}> = () => {
-    const [chartSize] = React.useState({
-        h: 500,
-        w: 1000,
-    })
+export default {
+    title: 'Charts',
+    components: Chart
+}
+
+const ChartStory = (props): JSX.Element => {
+    const {
+        ...args
+    } = props
 
     const data = useData();
-    const {h, w} = chartSize;
+
     const dimension = {
-        height: h,
-        width: w,
+        height: args.height,
+        width: args.width,
         marginLeft: 10,
         marginRight: 10,
         marginTop: 10,
@@ -55,11 +59,14 @@ const App: React.FC<{}> = () => {
         <Chart
             height={height}
             width={width}
+            innerHeight={innerHeight}
+            innerWidth={innerWidth}
             title={'Line Chart'}
             marginLeft={marginLeft}
             marginRight={marginRight}
             marginBottom={marginBottom}
             marginTop={marginTop}
+            {...args}
         >
             <ChartLayer>
                 <ChartGridLine
@@ -86,10 +93,24 @@ const App: React.FC<{}> = () => {
                     stroke={'black'}
                     lineCap={'round'}
                     lineJoin={'round'}
+                    {...args}
                 />
             </ChartLayer>
         </Chart>
     );
 }
 
-export default App;
+const Template = args => <ChartStory {...args} />
+
+export const LineChart = Template.bind({});
+
+LineChart.args = {
+    height: 400,
+    width: 800
+}
+
+LineChart.argTypes = {
+    stroke: {control: 'color'}
+}
+
+

@@ -38,12 +38,6 @@ export class ChartFactory {
         }
     }
 
-    public static createLinearXScale(domain: [number, number], width: number): ScaleLinear<number, number> {
-        return scaleLinear()
-            .domain(domain)
-            .rangeRound([0, width])
-    }
-
     public static createLinearYScale(domain: [number, number], height: number): ScaleLinear<number, number> {
         return scaleLinear()
             .domain(domain)
