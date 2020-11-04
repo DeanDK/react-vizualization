@@ -37,21 +37,21 @@ export class ChartFactory {
         }
     }
 
-    public static createLinearYScale(domain: [number, number], height: number): ScaleLinear<number, number> {
+    public static createLinearYScale(domain: number[], height: number): ScaleLinear<number, number> {
         return scaleLinear()
             .domain(domain)
             .rangeRound([height, 0])
             .nice()
     }
 
-    public static createTimeScale(domain: [number, number], width: number): ScaleTime<number, number> {
+    public static createTimeScale(domain: number[], width: number): ScaleTime<number, number> {
         return scaleTime()
             .domain(domain)
             .rangeRound([0, width])
             .nice()
     }
 
-    public static extentData(data: number[], fn: (d: any) => number): [number, number] {
+    public static extentData(data: number[], fn: (d: any) => number): number[] {
         return extent(data, fn);
     }
 

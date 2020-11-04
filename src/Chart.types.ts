@@ -146,7 +146,7 @@ export type ChartProps = {
      *
      * @default ""
      */
-    onZoom: (domain: number[] | Date[]) => void;
+    onZoom: (domain: number[]) => void;
 }
 
 /** A value that has .valueOf() function */

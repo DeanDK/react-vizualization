@@ -18,17 +18,28 @@ const ChartZoom: React.FC<Props> = (props) => {
         onZoomEnd
     } = props;
 
-    let zoom: d3ZoomBehavior<Element, unknown> | null = null
+    let zoom = React.useRef<d3ZoomBehavior<Element, unknown> | null>(null)
     let isZooming = false;
 
     useEffect(() => {
-        initZoom();
-    }, [xScale])
+        zoom.current = d3Zoom()
+            .extent([[0, 0], [width, height]])
+            .scaleExtent([.5, Infinity])
+            .translateExtent([[0, 0], [width, height]])
+            .filter(() => true)
+            .on('start', (event) => zoomEventProxy(event, initZoomStart))
+            .on('zoom', (event) => zoomEventProxy(event, initZooming))
+            .on('end', (event) => zoomEventProxy(event, initZoomEnd))
+
+        d3Select(stageRef.current.content)
+            .call(zoom.current)
+            .on('wheel', (event) => onWheel(event))
+    })
 
 
-    const zoomEventProxy = (event, callback: (domain: [number, number]) => void) => {
+    const zoomEventProxy = (event, callback: (domain: number[]) => void) => {
         const xScaleCopy = xScale.copy();
-        const zoomDomain: [number, number] = event.transform.rescaleX(xScaleCopy).domain();
+        const zoomDomain: number[] = event.transform.rescaleX(xScaleCopy).domain();
 
         const min = zoomDomain[0]
         const max = zoomDomain[1]
@@ -42,35 +53,20 @@ const ChartZoom: React.FC<Props> = (props) => {
         e.preventDefault()
     }
 
-    const initZoomStart = (domain: [number, number]) => {
+    const initZoomStart = (domain: number[]) => {
         isZooming = true;
 
         onZoomStart(domain)
     }
 
-    const initZooming = (domain: [number, number]) => {
+    const initZooming = (domain: number[]) => {
         onZooming(domain)
     }
 
-    const initZoomEnd = (domain: [number, number]) => {
+    const initZoomEnd = (domain: number[]) => {
         isZooming = false;
 
         onZoomEnd(domain)
-    }
-
-    const initZoom = () => {
-        zoom = d3Zoom()
-            .extent([[0, 0], [width, height]])
-            .scaleExtent([.5, Infinity])
-            .translateExtent([[0, 0], [width, height]])
-            .filter(() => true)
-            .on('start', (event) => zoomEventProxy(event, initZoomStart))
-            .on('zoom', (event) => zoomEventProxy(event, initZooming))
-            .on('end', (event) => zoomEventProxy(event, initZoomEnd))
-
-        d3Select(stageRef.current.content)
-            .call(zoom)
-            .on('wheel', (event) => onWheel(event))
     }
 
     return null;

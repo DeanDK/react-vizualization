@@ -16,7 +16,7 @@ export type Props = {
     /**
      *
      */
-    domain: [number, number]
+    domain: number[] | Date[]
     /**
      *
      */
@@ -24,14 +24,14 @@ export type Props = {
     /**
      *
      */
-    onZoomStart: (domain: [number, number]) => void
+    onZoomStart: (domain: number[]) => void
     /**
      *
      */
-    onZooming: (domain: [number, number]) => void
+    onZooming: (domain: number[]) => void
     /**
      *
      */
-    onZoomEnd: (domain: [number, number]) => void
+    onZoomEnd: (domain: number[]) => void
 
 }

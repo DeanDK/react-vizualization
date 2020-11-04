@@ -45,7 +45,7 @@ const ChartStory = (props): JSX.Element => {
 
     const domainY = React.useMemo(() => {
         return ChartFactory.extentData(data, yValue)
-    }, [data, yValue])
+    }, [data])
 
     const [newXDomain, setNewXDomain] = React.useState<[number, number] | null>(null);
 
@@ -53,11 +53,7 @@ const ChartStory = (props): JSX.Element => {
 
     const yScale = React.useMemo(() => {
         return ChartFactory.createLinearYScale(domainY, innerHeight)
-    }, [domainY])
-
-    if (!data) {
-        return <pre>Loading...</pre>
-    }
+    }, [domainY, innerHeight])
 
     const xAxisTimeFormat = ChartFactory.formatTime('%a');
 

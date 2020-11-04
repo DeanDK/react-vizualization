@@ -44,15 +44,15 @@ const Chart: React.FC<ChartProps> = (props) => {
         }
     }, [height, width, dimensions])
 
-    const onZoomStart = (domain: [number, number]) => {
+    const onZoomStart = (domain: number[]) => {
         onZoom(domain)
     }
 
-    const onZoomingStart = (domain: [number, number]) => {
+    const onZoomingStart = (domain: number[]) => {
         onZoom(domain)
     }
 
-    const onZoomEnd = (domain: [number, number]) => {
+    const onZoomEnd = (domain: number[]) => {
         onZoom(domain)
     }
 
@@ -68,7 +68,7 @@ const Chart: React.FC<ChartProps> = (props) => {
         >
             <Stage
                 height={height + 100}
-                width={width + 100}
+                width={innerWidth}
                 y={10}
                 ref={stageRef}
             >
@@ -82,7 +82,7 @@ const Chart: React.FC<ChartProps> = (props) => {
                 height={height}
                 width={innerWidth}
                 xScale={xScale}
-                domain={xScale.domain() as any}
+                domain={xScale.domain()}
                 stageRef={stageRef}
                 onZoomStart={onZoomStart}
                 onZooming={onZoomingStart}
