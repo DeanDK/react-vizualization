@@ -18,17 +18,6 @@ const ChartStory = (props): JSX.Element => {
         ...args
     } = props
 
-    const data = useData();
-
-    const dimension = {
-        height: args.height,
-        width: args.width,
-        marginLeft: 10,
-        marginRight: 10,
-        marginTop: 10,
-        marginBottom: 10
-    }
-
     const {
         height,
         width,
@@ -38,22 +27,43 @@ const ChartStory = (props): JSX.Element => {
         marginTop,
         innerHeight,
         innerWidth
-    } = ChartFactory.createSizing(dimension)
+    } = ChartFactory.createSizing({
+        height: args.height,
+        width: args.width,
+        marginLeft: args.marginLeft,
+        marginRight: args.marginRight,
+        marginTop: args.marginTop,
+        marginBottom: args.marginBottom,
+    })
 
-    if (!data) {
-        return <pre>Loading...</pre>
-    }
+    const data = useData()
 
     const xValue = d => d.timestamp
     const yValue = d => d.temperature
 
     const domainX = ChartFactory.extentData(data, xValue);
-    const domainY = ChartFactory.extentData(data, yValue);
 
-    const xScale = ChartFactory.createTimeScale(domainX, innerWidth)
-    const yScale = ChartFactory.createLinearYScale(domainY, innerHeight)
+    const domainY = React.useMemo(() => {
+        return ChartFactory.extentData(data, yValue)
+    }, [data, yValue])
+
+    const [newXDomain, setNewXDomain] = React.useState<[number, number] | null>(null);
+
+    const xScale = ChartFactory.createTimeScale(newXDomain ? newXDomain : domainX, innerWidth)
+
+    const yScale = React.useMemo(() => {
+        return ChartFactory.createLinearYScale(domainY, innerHeight)
+    }, [domainY])
+
+    if (!data) {
+        return <pre>Loading...</pre>
+    }
 
     const xAxisTimeFormat = ChartFactory.formatTime('%a');
+
+    const onZoom = (domain: [number, number]) => {
+        setNewXDomain(domain)
+    }
 
     return (
         <Chart
@@ -66,15 +76,16 @@ const ChartStory = (props): JSX.Element => {
             marginRight={marginRight}
             marginBottom={marginBottom}
             marginTop={marginTop}
+            xScale={xScale}
+            onZoom={onZoom}
             {...args}
         >
             <ChartLayer>
                 <ChartGridLine
                     xScale={xScale}
                     yScale={yScale}
+                    numberOfTicks={args.numberOfTicks}
                     xAxisTimeFormat={xAxisTimeFormat}
-                    numberOfXAxisTicks={args.numberOfXAxisTicks}
-                    numberOfYAxisTicks={args.numberOfYAxisTicks}
                     {...args}
                 />
                 <ChartAxis
@@ -110,8 +121,11 @@ export const LineChart = Template.bind({});
 LineChart.args = {
     height: 300,
     width: 800,
-    numberOfXAxisTicks: 11,
-    numberOfYAxisTicks: 11
+    marginLeft: 10,
+    marginRight: 40,
+    marginTop: 30,
+    marginBottom: 10,
+    numberOfTicks: 11
 }
 
 LineChart.argTypes = {

@@ -13,7 +13,6 @@ const ChartLine: React.FC<Props> = (props) => {
         yValue,
         stroke,
         lineCap,
-        lineJoin
     } = props;
 
     const xPoints = (d) => xScale(+xValue(d));
@@ -26,8 +25,9 @@ const ChartLine: React.FC<Props> = (props) => {
             points={points}
             stroke={stroke}
             lineCap={lineCap}
-            lineJoin={lineJoin}
-            x={50}
+            lineJoin={'bevel'}
+            shadowColor={'red'}
+            strokeWidth={1}
         />
     )
 }

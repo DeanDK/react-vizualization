@@ -37,4 +37,12 @@ export type Props = {
      *
      */
     numberOfYAxisTicks?: number;
+    /**
+     *
+     */
+    numOfTicks?: number;
+    /**
+     *
+     */
+    offset?: number;
 }

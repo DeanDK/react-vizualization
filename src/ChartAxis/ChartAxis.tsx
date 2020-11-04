@@ -14,12 +14,13 @@ export const ChartAxis: React.FC<Props> = (props) => {
     const innerWidth = dimensions.innerWidth
     const innerHeight = dimensions.innerHeight
 
-    const points = orientation === 'vertical' ? [0, 0, 0, innerHeight] : [0, innerHeight, innerWidth, innerHeight];
+    const points = orientation === 'vertical' ?
+        [0, 0, 0, innerHeight] :
+        [0, innerHeight, innerWidth, innerHeight];
 
     return (
         <>
             <Line
-                x={50}
                 points={points}
                 stroke="black"
                 scaleX={1}

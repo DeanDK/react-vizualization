@@ -1,6 +1,19 @@
 import React from "react";
 
-export const ChartStoreContext = React.createContext(null)
+type ChartStoreContextValue = {
+    height: number
+    width: number
+    dimensions: {
+        top: number
+        bottom: number
+        left: number
+        right: number
+        innerHeight: number
+        innerWidth: number
+    }
+}
+
+export const ChartStoreContext = React.createContext<ChartStoreContextValue | null>(null)
 
 export const useChartStore = () => {
     const store = React.useContext(ChartStoreContext)

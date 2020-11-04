@@ -5,8 +5,7 @@ import {
     scaleTime,
     timeFormat,
     extent,
-    max,
-    zip
+    zip,
 } from "d3";
 
 import {ChartDimensions, ChartSizing} from "./ChartFactory.types";
@@ -43,7 +42,6 @@ export class ChartFactory {
             .domain(domain)
             .rangeRound([height, 0])
             .nice()
-            .clamp(true)
     }
 
     public static createTimeScale(domain: [number, number], width: number): ScaleTime<number, number> {
@@ -51,11 +49,6 @@ export class ChartFactory {
             .domain(domain)
             .rangeRound([0, width])
             .nice()
-            .clamp(true)
-    }
-
-    public static calculateDomainMaxValue(data: number[], fn: (d: any) => number): [number, number] {
-        return [0, max(data, fn)]
     }
 
     public static extentData(data: number[], fn: (d: any) => number): [number, number] {

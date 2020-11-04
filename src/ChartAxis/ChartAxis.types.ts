@@ -1,4 +1,5 @@
 import Konva from "konva";
+import {ScaleFunctionTypes} from "../ChartFactory.types";
 
 export type Props = Konva.ShapeConfig & {
     /**
@@ -30,4 +31,11 @@ export type Props = Konva.ShapeConfig & {
      *
      * @default 0
      */
+    xScale: ScaleFunctionTypes
+    /**
+     *
+     *
+     * @default 0
+     */
+    yScale: ScaleFunctionTypes
 }
