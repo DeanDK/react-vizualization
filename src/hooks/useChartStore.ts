@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 type ChartStoreContextValue = {
     height: number
@@ -22,5 +22,5 @@ export const useChartStore = () => {
         throw new Error('useChartStore must be used within a ChartStoreProvider')
     }
 
-    return store;
+    return store
 }

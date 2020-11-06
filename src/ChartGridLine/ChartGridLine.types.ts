@@ -1,4 +1,4 @@
-import {ScaleFunctionTypes} from "../ChartFactory.types";
+import { ScaleFunctionTypes } from '../ChartFactory.types'
 
 export type Props = {
     /**
@@ -16,33 +16,33 @@ export type Props = {
     /**
      *
      */
-    xAxisTickLabelOffset?: number;
+    xAxisTickLabelOffset?: number
     /**
      *
      */
-    yLabelTickLabelOffset?: number;
+    yLabelTickLabelOffset?: number
     /**
      *
      */
-    xAxisGridLinesOffset?: number;
+    xAxisGridLinesOffset?: number
     /**
      *
      */
-    yAxisGridLinesOffset?: number;
+    yAxisGridLinesOffset?: number
     /**
      *
      */
-    numberOfXAxisTicks?: number;
+    numberOfXAxisTicks?: number
     /**
      *
      */
-    numberOfYAxisTicks?: number;
+    numberOfYAxisTicks?: number
     /**
      *
      */
-    numOfTicks?: number;
+    numOfTicks?: number
     /**
      *
      */
-    offset?: number;
+    offset?: number
 }

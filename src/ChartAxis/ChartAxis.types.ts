@@ -1,5 +1,6 @@
-import Konva from "konva";
-import {ScaleFunctionTypes} from "../ChartFactory.types";
+import Konva from 'konva'
+
+import { ScaleFunctionTypes } from '../ChartFactory.types'
 
 export type Props = Konva.ShapeConfig & {
     /**
@@ -7,33 +8,33 @@ export type Props = Konva.ShapeConfig & {
      *
      * @default
      */
-    orientation: 'vertical' | 'horizontal',
+    orientation: 'vertical' | 'horizontal'
     /**
      * Chart axis tension
      *
      * @default 0
      */
-    tension?: number;
+    tension?: number
     /**
      * Represents line shape, open or closed
      *
      * @default false
      */
-    closed?: boolean;
+    closed?: boolean
     /**
      * Determines if line is bezier
      *
      * @default false
      */
-    bezier?: boolean;
+    bezier?: boolean
     /**
+     *  d3 xAxis scale function
      *
-     *
-     * @default 0
+     * @default
      */
     xScale: ScaleFunctionTypes
     /**
-     *
+     * d3 yAxis scale function
      *
      * @default 0
      */

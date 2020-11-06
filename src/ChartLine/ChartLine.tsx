@@ -1,28 +1,22 @@
-import React from 'react';
-import { Line } from 'react-konva';
+import React from 'react'
+import { Line } from 'react-konva'
 
-import {Props} from "./ChartLine.types";
-import {ChartFactory} from "../ChartFactory";
+import { Props } from './ChartLine.types'
 
-const ChartLine: React.FC<Props> = (props) => {
-    const {
-        data,
-        xScale,
-        yScale,
-        xValue,
-        yValue,
-        stroke,
-        lineCap,
-    } = props;
-
-    const xPoints = (d) => xScale(+xValue(d));
-    const yPoints = (d) => yScale(+yValue(d));
-
-    const points = ChartFactory.calculateXAndYCoordinates(data.map(xPoints), data.map(yPoints))
+const ChartLine: React.FC<Props> = props => {
+    const { data, xScale, yScale, stroke, lineCap } = props
 
     return (
         <Line
-            points={points}
+            perfectDrawEnabled={true}
+            listening={false}
+            points={data.map((dataItem, index) => {
+                if (index % 2) {
+                    return yScale(dataItem)
+                }
+
+                return xScale(dataItem)
+            })}
             stroke={stroke}
             lineCap={lineCap}
             lineJoin={'bevel'}
@@ -32,4 +26,4 @@ const ChartLine: React.FC<Props> = (props) => {
     )
 }
 
-export default ChartLine;
+export default ChartLine

@@ -1,45 +1,43 @@
-import {ScaleFunctionTypes} from "../ChartFactory.types";
-import Konva from "konva";
+import Konva from 'konva'
+
+import { ScaleFunctionTypes } from '../ChartFactory.types'
 
 export type Props = Konva.ShapeConfig & {
+    data: number[]
     /**
      *
      */
-    dashed?: number[],
+    dashed?: number[]
     /**
      *
      */
-    data: number[],
+    scaleXId?: string
     /**
      *
      */
-    scaleXId?: string,
+    scaleYId?: string
     /**
      *
      */
-    scaleYId?: string,
+    stroke?: string
     /**
      *
      */
-    stroke?: string,
+    strokeWidth?: number
     /**
      *
      */
-    strokeWidth?: number,
+    xScale: ScaleFunctionTypes
     /**
      *
      */
-    xScale: ScaleFunctionTypes,
+    yScale: ScaleFunctionTypes
     /**
      *
      */
-    yScale: ScaleFunctionTypes,
+    xValue: (d) => number | string
     /**
      *
      */
-    xValue: (d) => number | string;
-    /**
-     *
-     */
-    yValue: (d) => number | string;
+    yValue: (d) => number | string
 }

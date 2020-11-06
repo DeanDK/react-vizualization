@@ -1,14 +1,14 @@
-import {ScaleFunctionTypes} from "../ChartFactory.types";
+import { ScaleFunctionTypes } from '../ChartFactory.types'
 
 export type Props = {
     /**
      *
      */
-    height: number;
+    height: number
     /**
      *
      */
-    width: number;
+    width: number
     /**
      *
      */
@@ -17,6 +17,10 @@ export type Props = {
      *
      */
     domain: number[] | Date[]
+    /**
+     *
+     */
+    dimensions: any
     /**
      *
      */
@@ -33,5 +37,4 @@ export type Props = {
      *
      */
     onZoomEnd: (domain: number[]) => void
-
 }

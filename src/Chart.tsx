@@ -1,13 +1,12 @@
-import React from 'react';
-import {KonvaNodeComponent, Stage} from 'react-konva'
+import React from 'react'
+import { Stage } from 'react-konva'
 
-import {ChartRoot} from "./Chart.styles";
-import {ChartProps} from "./Chart.types";
-import {ChartStoreContext} from "./hooks/useChartStore";
-import {StageConfig} from "konva/types/Stage";
-import ChartZoom from "./ChartZoom/ChartZoom";
+import { ChartRoot } from './Chart.styles'
+import { ChartProps } from './Chart.types'
+import ChartZoom from './ChartZoom/ChartZoom'
+import { ChartStoreContext } from './hooks/useChartStore'
 
-const Chart: React.FC<ChartProps> = (props) => {
+const Chart: React.FC<ChartProps> = props => {
     const {
         width,
         height,
@@ -19,28 +18,27 @@ const Chart: React.FC<ChartProps> = (props) => {
         marginRight,
         children,
         xScale,
-        onZoom
-    } = props;
+        onZoom,
+    } = props
 
-    // @ts-ignore
-    const stageRef = React.useRef<MutableRefObject<KonvaNodeComponent<StageConfig, NodeConfig>>>(null)
+    const stageRef = React.useRef(null)
 
     const dimensions = React.useMemo(() => {
         return {
-            top: marginTop,
             bottom: marginBottom,
+            innerHeight,
+            innerWidth,
             left: marginLeft,
             right: marginRight,
-            innerHeight,
-            innerWidth
+            top: marginTop,
         }
     }, [marginTop, marginRight, marginBottom, marginLeft, innerHeight, innerWidth])
 
     const providerObject = React.useMemo(() => {
         return {
+            dimensions,
             height,
             width,
-            dimensions
         }
     }, [height, width, dimensions])
 
@@ -64,22 +62,12 @@ const Chart: React.FC<ChartProps> = (props) => {
             marginLeft={marginLeft}
             marginRight={marginRight}
             marginTop={marginTop}
-            marginBottom={marginBottom}
-        >
-            <Stage
-                height={height + 100}
-                width={innerWidth}
-                y={10}
-                ref={stageRef}
-            >
-                <ChartStoreContext.Provider
-                    value={providerObject}
-                >
-                    {children}
-                </ChartStoreContext.Provider>
+            marginBottom={marginBottom}>
+            <Stage height={height} width={innerWidth} y={10} ref={stageRef}>
+                <ChartStoreContext.Provider value={providerObject}>{children}</ChartStoreContext.Provider>
             </Stage>
             <ChartZoom
-                height={height}
+                height={innerHeight}
                 width={innerWidth}
                 xScale={xScale}
                 domain={xScale.domain()}
@@ -87,9 +75,10 @@ const Chart: React.FC<ChartProps> = (props) => {
                 onZoomStart={onZoomStart}
                 onZooming={onZoomingStart}
                 onZoomEnd={onZoomEnd}
+                dimensions={dimensions}
             />
         </ChartRoot>
     )
 }
 
-export default Chart;
+export default Chart

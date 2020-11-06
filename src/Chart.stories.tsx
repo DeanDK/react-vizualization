@@ -1,22 +1,22 @@
-import React from 'react';
+import React from 'react'
 
-import {useData} from "./hooks/useData";
-import {ChartFactory} from "./ChartFactory";
-import Chart from "./Chart";
-import {ChartLayer} from "./ChartLayer/ChartLayer";
-import ChartGridLine from "./ChartGridLine/ChartGridLine";
-import ChartAxis from "./ChartAxis/ChartAxis";
-import ChartLine from "./ChartLine/ChartLine";
+import Chart from './Chart'
+import ChartAxis from './ChartAxis/ChartAxis'
+import { ChartFactory } from './ChartFactory'
+import ChartGridLine from './ChartGridLine/ChartGridLine'
+import { ChartLayer } from './ChartLayer/ChartLayer'
+import ChartLine from './ChartLine/ChartLine'
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const data = require('../.storybook/assets/data.json')
 
 export default {
+    components: Chart,
     title: 'Charts',
-    components: Chart
 }
 
 const ChartStory = (props): JSX.Element => {
-    const {
-        ...args
-    } = props
+    const { ...args } = props
 
     const {
         height,
@@ -26,36 +26,30 @@ const ChartStory = (props): JSX.Element => {
         marginBottom,
         marginTop,
         innerHeight,
-        innerWidth
+        innerWidth,
     } = ChartFactory.createSizing({
         height: args.height,
-        width: args.width,
+        marginBottom: args.marginBottom,
         marginLeft: args.marginLeft,
         marginRight: args.marginRight,
         marginTop: args.marginTop,
-        marginBottom: args.marginBottom,
+        width: args.width,
     })
 
-    const data = useData()
+    const dataXValues = Object.keys(data).map(key => new Date(key).getTime()) as number[]
+    const dataYValues = Object.values(data).flat() as number[]
 
-    const xValue = d => d.timestamp
-    const yValue = d => d.temperature
+    const newData = ChartFactory.calculateXAndYCoordinates(dataXValues, dataYValues)
 
-    const domainX = ChartFactory.extentData(data, xValue);
+    const domainX = ChartFactory.extentData(dataXValues, d => d)
+    const domainY = ChartFactory.extentData(dataYValues, d => d)
 
-    const domainY = React.useMemo(() => {
-        return ChartFactory.extentData(data, yValue)
-    }, [data])
+    const [newXDomain, setNewXDomain] = React.useState<number[]>(domainX)
 
-    const [newXDomain, setNewXDomain] = React.useState<[number, number] | null>(null);
+    const xScale = ChartFactory.createTimeScale(newXDomain, innerWidth)
+    const yScale = ChartFactory.createLinearYScale(domainY, innerHeight)
 
-    const xScale = ChartFactory.createTimeScale(newXDomain ? newXDomain : domainX, innerWidth)
-
-    const yScale = React.useMemo(() => {
-        return ChartFactory.createLinearYScale(domainY, innerHeight)
-    }, [domainY, innerHeight])
-
-    const xAxisTimeFormat = ChartFactory.formatTime('%a');
+    const xAxisTimeFormat = ChartFactory.formatTime('%a')
 
     const onZoom = (domain: [number, number]) => {
         setNewXDomain(domain)
@@ -74,8 +68,7 @@ const ChartStory = (props): JSX.Element => {
             marginTop={marginTop}
             xScale={xScale}
             onZoom={onZoom}
-            {...args}
-        >
+            {...args}>
             <ChartLayer>
                 <ChartGridLine
                     xScale={xScale}
@@ -84,22 +77,12 @@ const ChartStory = (props): JSX.Element => {
                     xAxisTimeFormat={xAxisTimeFormat}
                     {...args}
                 />
-                <ChartAxis
-                    orientation={'vertical'}
-                    xScale={xScale}
-                    yScale={yScale}
-                />
-                <ChartAxis
-                    orientation={'horizontal'}
-                    xScale={xScale}
-                    yScale={yScale}
-                />
+                <ChartAxis orientation={'vertical'} xScale={xScale} yScale={yScale} />
+                <ChartAxis orientation={'horizontal'} xScale={xScale} yScale={yScale} />
                 <ChartLine
-                    data={data}
+                    data={newData}
                     xScale={xScale}
                     yScale={yScale}
-                    xValue={xValue}
-                    yValue={yValue}
                     stroke={'black'}
                     lineCap={'round'}
                     lineJoin={'round'}
@@ -107,25 +90,23 @@ const ChartStory = (props): JSX.Element => {
                 />
             </ChartLayer>
         </Chart>
-    );
+    )
 }
 
 const Template = args => <ChartStory {...args} />
 
-export const LineChart = Template.bind({});
+export const LineChart = Template.bind({})
 
 LineChart.args = {
     height: 300,
-    width: 800,
+    marginBottom: 10,
     marginLeft: 10,
     marginRight: 40,
     marginTop: 30,
-    marginBottom: 10,
-    numberOfTicks: 11
+    numberOfTicks: 11,
+    width: 800,
 }
 
 LineChart.argTypes = {
-    stroke: {control: 'color'}
+    stroke: { control: 'color' },
 }
-
-
