@@ -75,7 +75,6 @@ const Chart: React.FC<ChartProps> = props => {
                 onZoomStart={onZoomStart}
                 onZooming={onZoomingStart}
                 onZoomEnd={onZoomEnd}
-                dimensions={dimensions}
             />
         </ChartRoot>
     )

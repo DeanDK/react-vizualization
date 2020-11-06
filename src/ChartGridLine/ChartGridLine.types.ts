@@ -2,47 +2,19 @@ import { ScaleFunctionTypes } from '../ChartFactory.types'
 
 export type Props = {
     /**
-     *
+     * d3 xAxis scale function
      */
     xScale: ScaleFunctionTypes
     /**
-     *
+     * d3 xAxis scale function
      */
     yScale: ScaleFunctionTypes
     /**
-     *
+     * Number of x axis grid lines
      */
-    xAxisTimeFormat: (date: Date) => string
+    numberOfXAxisGridLines?: number
     /**
-     *
+     * Number of y axis grid lines
      */
-    xAxisTickLabelOffset?: number
-    /**
-     *
-     */
-    yLabelTickLabelOffset?: number
-    /**
-     *
-     */
-    xAxisGridLinesOffset?: number
-    /**
-     *
-     */
-    yAxisGridLinesOffset?: number
-    /**
-     *
-     */
-    numberOfXAxisTicks?: number
-    /**
-     *
-     */
-    numberOfYAxisTicks?: number
-    /**
-     *
-     */
-    numOfTicks?: number
-    /**
-     *
-     */
-    offset?: number
+    numberOfYAxisGridLines?: number
 }

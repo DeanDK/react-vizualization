@@ -20,21 +20,17 @@ export type Props = {
     /**
      *
      */
-    dimensions: any
+    stageRef?: any
     /**
      *
      */
-    stageRef: any
+    onZoomStart?: (domain: number[]) => void
     /**
      *
      */
-    onZoomStart: (domain: number[]) => void
+    onZooming?: (domain: number[]) => void
     /**
      *
      */
-    onZooming: (domain: number[]) => void
-    /**
-     *
-     */
-    onZoomEnd: (domain: number[]) => void
+    onZoomEnd?: (domain: number[]) => void
 }

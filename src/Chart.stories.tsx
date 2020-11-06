@@ -68,6 +68,7 @@ const ChartStory = (props): JSX.Element => {
             marginTop={marginTop}
             xScale={xScale}
             onZoom={onZoom}
+            zoom={onZoom}
             {...args}>
             <ChartLayer>
                 <ChartGridLine
