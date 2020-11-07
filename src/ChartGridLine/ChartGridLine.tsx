@@ -6,14 +6,14 @@ import { useChartStore } from '../hooks/useChartStore'
 import { Props } from './ChartGridLine.types'
 
 const ChartGridLine: React.FC<Props> = props => {
-    const { xScale, yScale } = props
+    const { xScale, yScale, numberOfXAxisGridLines = 10, numberOfYAxisGridLines = 10 } = props
 
     const {
         dimensions: { innerHeight, innerWidth },
     } = useChartStore()
 
-    const xAxisTickValues = xScale.ticks()
-    const yAxisTickValues = yScale.ticks()
+    const xAxisTickValues = xScale.ticks(numberOfXAxisGridLines)
+    const yAxisTickValues = yScale.ticks(numberOfYAxisGridLines)
 
     return (
         <>
